@@ -26,11 +26,6 @@
 		<junit.version>4.12</junit.version>
 		<slf4j.version>1.7.12</slf4j.version>
 
-		<httpclient.version>4.5</httpclient.version>
-
-		<commons.version>1.10</commons.version>
-		<ini4j.version>0.5.4</ini4j.version>
-		<jsr311.api.version>1.1.1</jsr311.api.version>
 
 
 		<!-- plugins -->
@@ -82,38 +77,6 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-context</artifactId>
-		</dependency>
-
-
-		<dependency>
-			<groupId>org.apache.httpcomponents</groupId>
-			<artifactId>httpclient</artifactId>
-			<version>${httpclient.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>javax.ws.rs</groupId>
-			<artifactId>jsr311-api</artifactId>
-			<version>${jsr311.api.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.commons</groupId>
-			<artifactId>commons-compress</artifactId>
-			<version>${commons.version}</version>
-		</dependency>
-
-
-		<dependency>
-			<groupId>commons-configuration</groupId>
-			<artifactId>commons-configuration</artifactId>
-			<version>${commons.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.ini4j</groupId>
-			<artifactId>ini4j</artifactId>
-			<version>${ini4j.version}</version>
 		</dependency>
 
 
