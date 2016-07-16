@@ -2,13 +2,13 @@ import java.io.File
 import java.nio.file.{StandardCopyOption, Files}
 import javax.annotation.PostConstruct
 
-import com.tikal.weather.configuration.Application
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.{Autowired, Value}
 import org.springframework.boot.test.{IntegrationTest, SpringApplicationConfiguration, TestRestTemplate, WebIntegrationTest}
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.springframework.util.Assert
+import com.tikal.weather.Application
 
 /**
  * Created by Haim.Turkel on 1/3/2016.

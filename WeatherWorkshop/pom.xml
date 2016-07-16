@@ -35,10 +35,7 @@
 		<maven.surefire.plugin.version>2.19.1</maven.surefire.plugin.version>
 
 		<!-- plugins propeties -->
-		<maven.compiler.target>1.7</maven.compiler.target>
-		<maven.compiler.source>1.7</maven.compiler.source>
-		<maven.compiler.testTarget>1.7</maven.compiler.testTarget>
-		<maven.compiler.testSource>1.7</maven.compiler.testSource>
+		
 		<maven.assembly.plugin.version>2.6</maven.assembly.plugin.version>
 		<maven.dependency.plugin>2.10</maven.dependency.plugin>
 		<versions.maven.plugin.version>2.2</versions.maven.plugin.version>
@@ -61,7 +58,12 @@
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-actuator</artifactId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.hsqldb</groupId>
+			<artifactId>hsqldb</artifactId>
 		</dependency>
 
 
