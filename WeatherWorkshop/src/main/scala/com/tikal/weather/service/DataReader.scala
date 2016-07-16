@@ -16,13 +16,14 @@ class DataReader {
 
   @PostConstruct
   def init() = {
-    readDataFromFile("C:\\work\\scala\\data\\weather\\BeitJamal\\jamal_june_2016_temp.csv")
+    readDataFromFile("data/jamal_june_2016_temp.csv")
   }
   
   def readDataFromFile(fileName: String) = {
+    val x = getClass().getClassLoader().getResource(fileName)
     val codec: Codec = Codec.string2codec("Windows-1255"); // required because of Hebrew in the data file
-    val linesAllFiles = Source.fromFile(fileName)(codec).getLines().toList.drop(1)
-      
+    //val linesAllFiles = Source.fromFile(fileName)(codec).getLines().toList.drop(1)
+    val linesAllFiles = Source.fromURL(x)(codec).getLines().toList.drop(1)
     val lines : List[WeatherData] =
       for (line <- linesAllFiles) yield {
         val p = line.split(",") ;

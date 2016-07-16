@@ -8,4 +8,5 @@ import org.springframework.stereotype.Repository
 
 trait RealTimeDataDao extends CrudRepository[RealTimeData, java.lang.Long] {
   
+  def findByStationId(stationId : String) : java.util.ArrayList[RealTimeData] ;
 }
