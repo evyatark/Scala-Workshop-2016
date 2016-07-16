@@ -6,9 +6,7 @@ import org.springframework.ui.Model
 import org.springframework.stereotype.Component
 import org.springframework.stereotype.Controller
 
-/**
-  * Created by Haim.Turkel on 1/3/2016.
-  */
+
 @Controller
 @RequestMapping(value = Array("/ui"))
 class UIController {
