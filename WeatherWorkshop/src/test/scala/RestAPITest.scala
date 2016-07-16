@@ -10,9 +10,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner
 import org.springframework.util.Assert
 import com.tikal.weather.Application
 
-/**
- * Created by Haim.Turkel on 1/3/2016.
- */
+
 @RunWith(classOf[SpringJUnit4ClassRunner])
 @SpringApplicationConfiguration(Array(classOf[Application]))
 @WebIntegrationTest
