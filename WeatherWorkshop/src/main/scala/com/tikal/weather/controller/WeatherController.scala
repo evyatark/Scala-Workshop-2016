@@ -9,6 +9,8 @@ import javax.annotation.PostConstruct
 import org.springframework.stereotype.Controller
 import java.lang.Iterable
 import scala.collection.JavaConversions.asScalaBuffer
+import com.tikal.weather.service.RealTimeTemperature
+import com.tikal.weather.service.RealTimeTemperature
 
 /**
   * Created by Evyatar on 1/7/2016.
@@ -21,7 +23,19 @@ class WeatherController { //@Autowired()(private val dao: RealTimeDataDao) {
   @Autowired
   val dao : RealTimeDataDao = null;
 
-
+  @Autowired
+  val rtTemperatureService : RealTimeTemperature = null ;
+  
+  @RequestMapping(value = Array("/dataMonth"), method = Array(RequestMethod.GET))
+  def dataMonth(
+      @RequestParam(value="month", defaultValue="june") month : String,
+      @RequestParam(value="year", defaultValue="2016") year : String
+      ):  String = {
+      logger.warn(s"data, month=$month, year=$year")
+      rtTemperatureService.minMaxTemperature("7151");
+  }
+  
+  
   @CrossOrigin
   @RequestMapping(value = Array("/data"), method = Array(RequestMethod.GET))
   def data(
