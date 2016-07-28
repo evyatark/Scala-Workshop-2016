@@ -17,20 +17,14 @@ class UIController {
   @Autowired
   val rtTemperatureService : RealTimeTemperature = null ;
   
-  @CrossOrigin
+  //@CrossOrigin
   @RequestMapping(value = Array("fullMonth"), method = Array(RequestMethod.GET))
   def ui(model : Model):  String = {
     model.addAttribute("month", "July")
     model.addAttribute("year", "2016")
+    model.addAttribute("data", rtTemperatureService.minMaxTemperature("7151"));
     "FullMonthTemperatureGraph"
   }
 
-  @RequestMapping(value = Array("fullMonthModel"), method = Array(RequestMethod.GET))
-  def fullMonth(model : Model):  String = {
-    model.addAttribute("month", "July")
-    model.addAttribute("year", "2016")
-    model.addAttribute("data", rtTemperatureService.minMaxTemperature("7151"));
-    "FullMonthTemperatureModel"
-  }
 
 }
