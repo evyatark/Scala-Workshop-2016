@@ -1,3 +1,5 @@
+.idea/
+weather.iml
+.DS_Store
 WeatherWorkshop/target/
 var/
-.metadata/
