@@ -44,6 +44,7 @@ class DataReader {
   }
   
   
+  
   case class WeatherData(
     val date : String, 
     val time : String,

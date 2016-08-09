@@ -11,6 +11,7 @@ import java.lang.Iterable
 import scala.collection.JavaConversions.asScalaBuffer
 import com.tikal.weather.service.RealTimeTemperature
 import com.tikal.weather.service.RealTimeTemperature
+import com.tikal.weather.service.MongoDisplayService
 
 /**
   * Created by Evyatar on 1/7/2016.
@@ -25,6 +26,7 @@ class WeatherController {
 
   @Autowired
   val rtTemperatureService : RealTimeTemperature = null ;
+  
   
   @RequestMapping(value = Array("/dataMonth"), method = Array(RequestMethod.GET))
   def dataMonth(
@@ -54,11 +56,9 @@ class WeatherController {
       val y  = dao.findAll() ;
       val all : List[RealTimeData] = asScalaBuffer(y.asInstanceOf[java.util.ArrayList[RealTimeData]]).toList
       logger.info("size="+all.size);
-//      val z = y.iterator().next()
-//      logger.info("z="+z)
-//      logger.info("z.id="+z.id)
       val x : RealTimeData = dao.findOne(all(0).id)
       s"${x.stationId} ${x.date} ${x.time} ${x.maxTemperature}"
-      //"1"
   }
+  
+
 }
