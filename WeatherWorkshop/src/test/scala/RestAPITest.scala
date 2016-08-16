@@ -31,7 +31,7 @@ class RestAPITest {
   @Test
   def weatherTest(): Unit = {
     val rest = new TestRestTemplate();
-    val dataUrl = s"http://localhost:8092/$serverContextPath/data"
+    val dataUrl = s"http://localhost:8092/$serverContextPath/dataMonth"
     val vars: Map[String, String] = Map()
     val response = rest.getForObject(dataUrl, classOf[String], vars)
     Assert.notNull(response)
