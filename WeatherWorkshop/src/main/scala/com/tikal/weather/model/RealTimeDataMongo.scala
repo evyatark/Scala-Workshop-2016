@@ -19,7 +19,10 @@ class RealTimeDataMongo {
   @BeanProperty  var humidity : String = _
   @BeanProperty  var rain : String = _
 
+  @BeanProperty  var month : Int = _
+  @BeanProperty  var year : Int = _
+  
   override def toString() = {
-    s"$stationId $date $time $maxTemperature $minTemperature"
+    s"$stationId $date $time $temperature $maxTemperature $minTemperature $nearGroundTemperature $humidity $rain"
   }
 }

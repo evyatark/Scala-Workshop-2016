@@ -2,19 +2,21 @@ package com.tikal.weather.service
 
 import scala.io.Codec
 import scala.io.Source
-import com.tikal.weather.model.RealTimeData
+//import com.tikal.weather.model.RealTimeData
 import org.springframework.beans.factory.annotation.Autowired
-import com.tikal.weather.dao.RealTimeDataDao
+//import com.tikal.weather.dao.RealTimeDataDao
 import javax.annotation.PostConstruct
 import org.springframework.stereotype.Component
+import com.tikal.weather.model.RealTimeDataMongo
+import com.tikal.weather.dao.RealTimeDataMongoDao
 
 @Component
 class DataReader {
 
   @Autowired
-  val dao : RealTimeDataDao = null;
+  val dao : RealTimeDataMongoDao = null;
 
-  @PostConstruct
+  //@PostConstruct
   def init() = {
     readDataFromFile("data/jamal_june_2016_temp.csv")
   }
@@ -30,8 +32,8 @@ class DataReader {
         val data = new WeatherData(p(1), p(2), p(4), p(5)) ;
         data
       }
-    val rtAllData : List[RealTimeData] = for (line <- lines) yield {
-      val rtData : RealTimeData = new RealTimeData() ;
+    val rtAllData : List[RealTimeDataMongo] = for (line <- lines) yield {
+      val rtData : RealTimeDataMongo = new RealTimeDataMongo() ;
       rtData.stationId = "7151" ;
       rtData.date = line.date ;
       rtData.time = line.time ;
@@ -40,7 +42,7 @@ class DataReader {
       rtData
     }
     
-    rtAllData.foreach { rt : RealTimeData => dao.save(rt) }
+    rtAllData.foreach { rt : RealTimeDataMongo => dao.save(rt) }
   }
   
   
