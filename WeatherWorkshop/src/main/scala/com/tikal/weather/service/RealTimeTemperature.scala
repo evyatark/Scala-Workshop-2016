@@ -26,19 +26,27 @@ class RealTimeTemperature {
    */
   def temperatureForOneDay(stationId : String, day : String, month : String, year : String): String = {
     // one option is to retrieve all data for that month:
-    //val all: List[RealTimeDataMongo] = rtService.findByStationAndMonthYear(stationId, month.toInt, year.toInt)
+    val all: List[RealTimeDataMongo] = rtService.findByStationAndMonthYear(stationId, month.toInt, year.toInt)
     // and work from there
+     val tmpOdfDay = all.filter{ x => x.date == day+'-'+month+'-'+year }.sortBy { x => x.time }
     
-    // THE RESULT OF THIS SERVICE IS A STRING THAT looks like this:
-    "[ ['Time', 'Temperature']," +
-    "['00:10', 21.0]," +
-    "['00:20', 21.4]," +
-    "['00:30', 22.0]," +
-    "['00:40', 22.5]," +
-    "['00:50', 23.0]," +
-    "['01:00', 24.0]" +
-    // ...
-    "]"
+     var str = "[ ['Time', 'Temperature'],"
+    for (measure <- tmpOdfDay ) {
+      str = str + "[\'" + measure.time + "\', " + measure.temperature + "],"
+    }
+     
+     return str.dropRight(1) +"]"
+    
+//    // THE RESULT OF THIS SERVICE IS A STRING THAT looks like this:
+//    "[ ['Time', 'Temperature']," +
+//    "['00:10', 21.0]," +
+//    "['00:20', 21.4]," +
+//    "['00:30', 22.0]," +
+//    "['00:40', 22.5]," +
+//    "['00:50', 23.0]," +
+//    "['01:00', 24.0]" +
+//    // ...
+//    "]"
   }
 
   def minMaxTemperature_old(stationId : String): String = {
