@@ -13,7 +13,7 @@ import scala.collection.immutable.HashMap
 @Component
 class MongoReader {
 
-  private val logger: Logger = LoggerFactory.getLogger(classOf[MongoDisplayService])
+  private val logger: Logger = LoggerFactory.getLogger(classOf[MongoReader])
 
   @Autowired
   val d: RealTimeDataMongoDao = null;

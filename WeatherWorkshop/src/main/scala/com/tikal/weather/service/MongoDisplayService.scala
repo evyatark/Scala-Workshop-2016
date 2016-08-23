@@ -6,6 +6,7 @@ import com.tikal.weather.dao.RealTimeDataMongoDao
 import scala.collection.JavaConversions.asScalaBuffer
 import org.slf4j.Logger
 import org.slf4j.LoggerFactory
+import com.tikal.weather.dao.HistoricalDataDao
 
 @Service
 class MongoDisplayService {
@@ -16,9 +17,11 @@ class MongoDisplayService {
   @Autowired
   val d : RealTimeDataMongoDao = null ;
   
+  @Autowired
+  val historicDao : HistoricalDataDao = null ;
+  
   def displayAllRtData() : String = {
     logger.info("displayAllRtData")
-//    "qqq"
     val s = asScalaBuffer(d.findByStationId("7151")).toList.mkString("\n")
     logger.info(s)
     s
@@ -31,6 +34,10 @@ class MongoDisplayService {
     s
   }
 
+  def displayHistoricDayData(date : String) : String = {
+    val s = time { asScalaBuffer(historicDao.findByDate(date)).toList.mkString("\n") }
+    s
+  }
   
   def time[R](block: => R): R = {  
     val t0 = System.nanoTime()

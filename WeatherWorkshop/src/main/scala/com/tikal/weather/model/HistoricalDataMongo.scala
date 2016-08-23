@@ -14,6 +14,9 @@ class HistoricalDataMongo {
   @BeanProperty  var minTemperature : String = _
   @BeanProperty  var rain : String = _
 
+  @BeanProperty  var month : Int = _
+  @BeanProperty  var year : Int = _
+
   override def toString() = {
     s"$stationId $date $maxTemperature $minTemperature $rain"
   }
