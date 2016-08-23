@@ -38,8 +38,18 @@ class RTDataService {
   }
   
   def findByStationAndMonthYear(stationId : String, month : Int, year : Int) : List[RealTimeDataMongo] = {
-    val x = dao.findByStationIdAndMonthAndYear(stationId, month, year)
+    
+    val x = time{dao.findByStationIdAndMonthAndYear(stationId, month, year)}
+    
     asScalaBuffer(x).toList
+  }
+  
+   def time[R](block: => R): R = {  
+    val t0 = System.nanoTime()
+    val result = block    // call-by-name
+    val t1 = System.nanoTime()
+    logger.info("Elapsed time: " + (t1 - t0)/1000000 + "ms")
+    result
   }
   
   def findByStationAndDateRange(stationId : String, from : String, to : String) : List[RealTimeDataMongo] = {

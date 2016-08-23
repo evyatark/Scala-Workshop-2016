@@ -1,14 +1,13 @@
 <!DOCTYPE HTML>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>One Day Temperature - Scala Weather Workshop</title>
+    <title>Full Month Temperature - Scala Weather Workshop</title>
     
     <script th:inline="javascript">
 /*<![CDATA[*/
 
     var month = [[${month}]];
     var year = [[${year}]];
-    var day = [[${day}]];
     var data = [[${data}]];
 
 /*]]>*/
@@ -24,10 +23,10 @@
         var chartData = google.visualization.arrayToDataTable(eval(data));
 
         var options = {
-          title: 'time to temperature graph',
+          title: 'June 2016',
           //curveType: 'function',
-		  hAxis:{title:'time'},
-		  vAxis:{title:'temperature'},
+		  hAxis:{title:'day'},
+		  vAxis:{title:'number'},
           legend: { position: 'bottom' }
         };
 

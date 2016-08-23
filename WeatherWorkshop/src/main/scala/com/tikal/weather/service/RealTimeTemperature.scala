@@ -25,20 +25,33 @@ class RealTimeTemperature {
    * Implement this service correctly!
    */
   def temperatureForOneDay(stationId : String, day : String, month : String, year : String): String = {
-    // one option is to retrieve all data for that month:
-    //val all: List[RealTimeDataMongo] = rtService.findByStationAndMonthYear(stationId, month.toInt, year.toInt)
-    // and work from there
+   
+    val realTimeDataList = rtService.findByStationAndMonthYear(stationId, month.toInt, year.toInt)
     
-    // THE RESULT OF THIS SERVICE IS A STRING THAT looks like this:
-    "[ ['Time', 'Temperature']," +
-    "['00:10', 21.0]," +
-    "['00:20', 21.4]," +
-    "['00:30', 22.0]," +
-    "['00:40', 22.5]," +
-    "['00:50', 23.0]," +
-    "['01:00', 24.0]" +
-    // ...
-    "]"
+    
+    val timeTemperatureTuplesList =realTimeDataList
+      .filter (realTimeData => realTimeData.date == day + "-" + month + "-" + year)
+      .map (realTimeData => ("'" + realTimeData.time + "'", realTimeData.temperature)).toList;
+    val timeTemperatureTuplesListWithHeaders = ("'Time'", "'Temperature'") :: timeTemperatureTuplesList
+    
+    def mapTupleToString(tuple : (String, String)) : String = {
+      "[" + tuple._1 + "," + tuple._2  + "]"
+    }
+    
+    val timeTemperatureListWithHeadersStrList = timeTemperatureTuplesListWithHeaders.map( mapTupleToString ).toList
+    val normalizedStr = timeTemperatureListWithHeadersStrList mkString ","
+    return "[" + normalizedStr + "]";
+    
+    
+//    "[ ['Time', 'Temperature']," +
+//    "['00:10', 21.0]," +
+//    "['00:20', 21.4]," +
+//    "['00:30', 22.0]," +
+//    "['00:40', 22.5]," +
+//    "['00:50', 23.0]," +
+//    "['01:00', 24.0]" +
+//    // ...
+//    "]"
   }
 
   def minMaxTemperature_old(stationId : String): String = {
