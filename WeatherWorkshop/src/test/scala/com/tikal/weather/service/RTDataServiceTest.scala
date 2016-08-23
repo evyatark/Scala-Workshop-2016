@@ -2,10 +2,10 @@ package com.tikal.weather.service
 
 
 import java.io.File
-import java.nio.file.{StandardCopyOption, Files}
+import java.nio.file.{Files, StandardCopyOption}
 import javax.annotation.PostConstruct
 
-import org.junit.Test
+import org.junit.{Ignore, Test}
 import org.junit.runner.RunWith
 import org.springframework.beans.factory.annotation.{Autowired, Value}
 import org.springframework.boot.test.{IntegrationTest, SpringApplicationConfiguration, TestRestTemplate, WebIntegrationTest}
@@ -21,6 +21,7 @@ import org.junit.Assert._
 
 @RunWith(classOf[SpringJUnit4ClassRunner])
 @SpringApplicationConfiguration(Array(classOf[Application]))
+@Ignore
 class RTDataServiceTest {
 
   private val logger: Logger = LoggerFactory.getLogger(classOf[RTDataServiceTest])

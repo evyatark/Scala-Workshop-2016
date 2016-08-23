@@ -16,4 +16,5 @@ trait RealTimeDataMongoDao extends MongoRepository[RealTimeDataMongo, java.lang.
   def findByStationIdAndDateTimeBetween(stationId : String, from : Long, to : Long) : java.util.ArrayList[RealTimeDataMongo] ;
   
   def findByStationIdAndMonthAndYear(stationId : String, month : Int, year : Int) : java.util.ArrayList[RealTimeDataMongo] ;
+  def findByStationIdAndDate(stationId : String, date : String) : java.util.ArrayList[RealTimeDataMongo] ;
 }
