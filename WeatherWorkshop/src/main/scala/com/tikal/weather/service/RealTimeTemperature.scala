@@ -1,11 +1,12 @@
 package com.tikal.weather.service
 
-import org.springframework.stereotype.Service
-//import com.tikal.weather.model.RealTimeData
-//import com.tikal.weather.dao.RealTimeDataDao
-import org.springframework.beans.factory.annotation.Autowired
 import scala.collection.JavaConversions.asScalaBuffer
-import org.slf4j.{Logger, LoggerFactory}
+
+import org.slf4j.Logger
+import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.stereotype.Service
+
 import com.tikal.weather.dao.RealTimeDataMongoDao
 import com.tikal.weather.model.RealTimeDataMongo
 
@@ -22,36 +23,41 @@ class RealTimeTemperature {
 
   
   /**
-   * Implement this service correctly!
+   * 
+   * This is the final format that the HTML expects to receive
+   * 
+   * [ ['Time', 'Temperature'], 
+    "['00:10', 21.0],
+    "['00:20', 21.4],
+    "['00:30', 22.0],
+    "['00:40', 22.5],
+    "['00:50', 23.0],
+    "['01:00', 24.0]
+    "]
    */
   def temperatureForOneDay(stationId : String, day : String, month : String, year : String): String = {
    
+		val dateStr = day + "-" + month + "-" + year
+    logger.info("Starting to process temperature data for: stationId: " + stationId + " and date: " + dateStr);
+    
     val realTimeDataList = rtService.findByStationAndMonthYear(stationId, month.toInt, year.toInt)
     
+    //create a list of tuples ('time', temperature)
+    val timeTemperatureTuplesList = realTimeDataList
+      .filter (realTimeData => {realTimeData.date == dateStr})
+        .map (realTimeData => ("'" + realTimeData.time + "'", realTimeData.temperature))
+          .toList
     
-    val timeTemperatureTuplesList =realTimeDataList
-      .filter (realTimeData => realTimeData.date == day + "-" + month + "-" + year)
-      .map (realTimeData => ("'" + realTimeData.time + "'", realTimeData.temperature)).toList;
+    //prepend header
     val timeTemperatureTuplesListWithHeaders = ("'Time'", "'Temperature'") :: timeTemperatureTuplesList
     
-    def mapTupleToString(tuple : (String, String)) : String = {
-      "[" + tuple._1 + "," + tuple._2  + "]"
-    }
+    //map tuples to string
+    val normalizedStringsList = timeTemperatureTuplesListWithHeaders
+    .map{ case (time, temperature) =>  s"[$time,$temperature]"}.toList
     
-    val timeTemperatureListWithHeadersStrList = timeTemperatureTuplesListWithHeaders.map( mapTupleToString ).toList
-    val normalizedStr = timeTemperatureListWithHeadersStrList mkString ","
+    //normalize string
+    val normalizedStr = normalizedStringsList mkString ","
     return "[" + normalizedStr + "]";
-    
-    
-//    "[ ['Time', 'Temperature']," +
-//    "['00:10', 21.0]," +
-//    "['00:20', 21.4]," +
-//    "['00:30', 22.0]," +
-//    "['00:40', 22.5]," +
-//    "['00:50', 23.0]," +
-//    "['01:00', 24.0]" +
-//    // ...
-//    "]"
   }
 
   def minMaxTemperature_old(stationId : String): String = {

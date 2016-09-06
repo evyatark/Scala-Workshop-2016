@@ -31,6 +31,7 @@ class UIController {
     model.addAttribute("day", day)
     model.addAttribute("month", month)
     model.addAttribute("year", year)
+    
     val data = rtTemperatureService.temperatureForOneDay("7151", day, month, year) ;
     model.addAttribute("data", data);
     "OneDayTemperatureGraph"
