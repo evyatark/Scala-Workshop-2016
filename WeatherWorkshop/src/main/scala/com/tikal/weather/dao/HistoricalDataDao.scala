@@ -12,6 +12,7 @@ trait HistoricalDataDao extends MongoRepository[HistoricalDataMongo, java.lang.S
   def findByStationId(stationId : String) : java.util.ArrayList[HistoricalDataMongo] ;
 
   def findByDate(date : String) : java.util.ArrayList[HistoricalDataMongo] ;
+  def findByDateAndStationId(date : String, stationId : String) : java.util.ArrayList[HistoricalDataMongo] ;
 
   def findByDateTimeBetween(from : Long, to : Long) : java.util.ArrayList[HistoricalDataMongo] ;
   def findByStationIdAndDateTimeBetween(stationId : String, from : Long, to : Long) : java.util.ArrayList[HistoricalDataMongo] ;

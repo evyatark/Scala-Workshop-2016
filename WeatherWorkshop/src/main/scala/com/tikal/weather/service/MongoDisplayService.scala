@@ -38,6 +38,17 @@ class MongoDisplayService {
     val s = time { asScalaBuffer(historicDao.findByDate(date)).toList.mkString("\n") }
     s
   }
+
+  def displayHistoricDayData(station : String, date : String) : String = {
+    val s = time { asScalaBuffer(historicDao.findByDateAndStationId(date, station)).toList.mkString("\n") }
+    logger.info(s"station $station, date $date: $s")
+    s
+  }
+  def displayHistoricDayData(stationId : String, month : String, year : String) : String = {
+    val s = time { asScalaBuffer(historicDao.findByStationIdAndMonthAndYear(stationId, month.toInt, year.toInt)).toList.mkString("\n") }
+    //logger.info(s"station $station, date $date: $s")
+    s
+  }
   
   def time[R](block: => R): R = {  
     val t0 = System.nanoTime()

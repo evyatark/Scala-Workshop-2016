@@ -45,6 +45,19 @@ class MongoController {
     mongoDisplayService.displayHistoricDayData(date)
   }
 
+  @RequestMapping(value = Array("/historic/{date}/{station}"), method = Array(RequestMethod.GET))
+  def mongoDisplayHistoricDataByDate(@PathVariable("date") date: String, @PathVariable("station") station: String): String = {
+    mongoDisplayService.displayHistoricDayData(station, date)
+  }
+
+  @RequestMapping(value = Array("/historic/{station}/{month}/{year}"), method = Array(RequestMethod.GET))
+  def mongoDisplayHistoricDataByDate(
+      @PathVariable("month") month: String, 
+      @PathVariable("year") year: String, 
+      @PathVariable("station") station: String): String = {
+    mongoDisplayService.displayHistoricDayData(station, month, year)
+  }
+  
   @RequestMapping(value = Array("/mongoUploadFile"), method = Array(RequestMethod.POST))
   def mongoUploadFile(@RequestBody() file: MultipartFile): String = {
     if (!file.isEmpty) {
