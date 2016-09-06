@@ -102,7 +102,7 @@ class RealTimeTemperature {
         val temperatures: List[Double] = monthTemps._2.map(rt => rt.temperature.toDouble)
         (monthTemps._1, (temperatures.min, open, close, temperatures.max))
       })
-      .map{case (k,v) => s"[$k, ${v._1}, ${v._2}, ${v._3}, ${v._4}]"}
+      .map{case (k,v) => s"['$k', ${v._1}, ${v._2}, ${v._3}, ${v._4}]"}
       .mkString(",")
     "[ " + dataStr + " ]"
   }
