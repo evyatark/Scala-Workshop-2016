@@ -85,8 +85,26 @@ class RealTimeTemperature {
       Some(x.toDouble)
     }
     catch {
-      case _ => None 
+      case _:Throwable => None
     }
+  }
+
+  def getMonthlyData(stationId: String, month : Int) : String = {
+    val data: List[RealTimeDataMongo] = rtService.findByStationAndMonthNoon(stationId, month)
+    val dataStr = data
+      .filter(_.temperature != "-")
+      //Group by year. We suppose to get 30~ noons temperatures
+      .groupBy(d => d.month + "/" + d.year)
+      //Per year/month get the open, close, min and max for that month
+      .map(monthTemps => {
+        val open = monthTemps._2.head.temperature.toDouble
+        val close = monthTemps._2.reverse.head.temperature.toDouble
+        val temperatures: List[Double] = monthTemps._2.map(rt => rt.temperature.toDouble)
+        (monthTemps._1, (temperatures.min, open, close, temperatures.max))
+      })
+      .map{case (k,v) => s"[$k, ${v._1}, ${v._2}, ${v._3}, ${v._4}]"}
+      .mkString(",")
+    "[ " + dataStr + " ]"
   }
 
 }

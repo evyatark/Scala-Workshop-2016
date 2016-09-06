@@ -3,3 +3,5 @@ weather.iml
 .DS_Store
 WeatherWorkshop/target/
 var/
+WeatherWorkshop/derby.log
+WeatherWorkshop/metastore_db/

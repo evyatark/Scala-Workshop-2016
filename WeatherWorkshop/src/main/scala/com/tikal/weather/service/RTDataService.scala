@@ -55,4 +55,9 @@ class RTDataService {
     val format = new java.text.SimpleDateFormat("MM-dd-yyyy")
     format.parse(date).getTime
   }
+
+  def findByStationAndMonthNoon(station : String, month: Int) : List[RealTimeDataMongo] = {
+    val x = dao.findByStationIdAndMonthAndTime(station, month, "12:00")
+    asScalaBuffer(x).toList
+  }
 }

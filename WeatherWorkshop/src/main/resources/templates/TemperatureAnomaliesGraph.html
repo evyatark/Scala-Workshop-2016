@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Temperature Anomalies - Scala Weather Workshop</title>
+
+    <script th:inline="javascript">
+/*<![CDATA[*/
+
+//    var data ="[ " +
+//            "['00:10', 19.0, 21.0, 25.0, 28.0]," +
+//            "['00:20', 20.16, 20.20, 21.4, 22.5]," +
+//            "['00:30', 19, 22.0, 25, 26]," +
+//            "['00:40', 19, 24, 22.5, 26]," +
+//            "['00:50', 21, 23.0, 25, 25]," +
+//            "['01:00', 23, 24.0, 23, 24] " +
+//            "]";
+    var data = [[${data}]];
+
+/*]]>*/
+	</script>
+    
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+
+      function drawChart() {
+        var chartData = google.visualization.arrayToDataTable(eval(data), true);
+
+        var options = {
+          title: 'Temperature Anomalies',
+          //curveType: 'function',
+		  hAxis:{title:'Month'},
+		  vAxis:{title:'Temperature'},
+          legend: 'None'
+        };
+
+        var chart = new google.visualization.CandlestickChart(document.getElementById('curve_chart'));
+
+        chart.draw(chartData, options);
+      }
+    </script>
+  </head>
+  <body>
+    <div id="curve_chart" style="width: 900px; height: 500px"></div>
+  </body>
+</html>

@@ -7,7 +7,7 @@ import com.tikal.weather.model.RealTimeDataMongo
 
 
 trait RealTimeDataMongoDao extends MongoRepository[RealTimeDataMongo, java.lang.String] {
-  
+
   def findByStationId(stationId : String) : java.util.ArrayList[RealTimeDataMongo] ;
 
   def findByDate(date : String) : java.util.ArrayList[RealTimeDataMongo] ;
@@ -17,4 +17,6 @@ trait RealTimeDataMongoDao extends MongoRepository[RealTimeDataMongo, java.lang.
   
   def findByStationIdAndMonthAndYear(stationId : String, month : Int, year : Int) : java.util.ArrayList[RealTimeDataMongo] ;
   def findByStationIdAndDate(stationId : String, date : String) : java.util.ArrayList[RealTimeDataMongo] ;
+
+  def findByStationIdAndMonthAndTime(stationId: String, month: Int, time: String): java.util.List[RealTimeDataMongo]
 }

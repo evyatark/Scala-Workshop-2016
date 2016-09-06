@@ -36,4 +36,10 @@ class UIController {
     "OneDayTemperatureGraph"
   }
 
+  @RequestMapping(value = Array("anom"), method = Array(RequestMethod.GET))
+  def temperatureAnomalies(model : Model):  String = {
+    val data = rtTemperatureService.getMonthlyData("7151", 7)
+    model.addAttribute("data", data)
+    "TemperatureAnomaliesGraph"
+  }
 }
